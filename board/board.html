@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="board.js"></script>
+</head>
+<body>
+    <h1>게시판 연습하기</h1>
+    <table id="board" style="border: solid 3px skyblue;">
+        <tr>
+            <td>글번호</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>조회수</td>
+        </tr>
+    </table>
+
+    <script>
+        //let five = {number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52}
+        boardList.push({number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52});
+
+        onload = function (){
+            let board = document.querySelector('#board');
+            boardList.forEach(function(item,index,array){
+                let tr = document.createElement('tr');
+                board.appendChild(tr);
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td');
+                let td3 = document.createElement('td');
+                let td4 = document.createElement('td');
+                tr.appendChild(td1).innerHTML = item.number;
+                tr.appendChild(td2).innerHTML = item.title;
+                tr.appendChild(td3).innerHTML = item.writer;
+                tr.appendChild(td4).innerHTML = item.view;
+            });
+        }
+        console.log(boardList);
+    </script>
+</body>
+</html>
