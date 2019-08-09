@@ -10,18 +10,21 @@
 <!-- <script src="board.js"></script> -->
 </head>
 <body>
-<h1>게시판 연습하기</h1>
-<table id="board">
-    <tr>
-        <td>글번호</td>
-        <td>제목</td>
-        <td>작성자</td>
-        <td>조회수</td>
-    </tr>
-</table>
+    <h1>게시판 연습하기</h1>
+    <table id="board">
+        <tr>
+            <td>글번호</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>조회수</td>
+        </tr>
+    </table>
+    <input type="text" id="searchVal" value="">
+    <input type="button" onclick="search()" value="검색" />
 
 <script>
     let board = document.querySelector('#board');
+    let searchVal = document.querySelector('#searchVal');
     onload = function (){
         $.ajax({
             // url:"http://localhost:3005",
@@ -34,13 +37,15 @@
                 });
                 console.log(res);
                 boardList = res;
+                console.log(boardList);
                 list();
             },
             error: function(status,error){
                 console.log("error :" + error);
             }
         })
-        function list(){
+
+        function list() {
             boardList.forEach(function(item){
                 let tr = document.createElement('tr');
                 let number = document.createElement('td');
@@ -55,6 +60,11 @@
             });
             // console.log(boardList);
         }
+    }
+    function search(){
+        let result = boardList.filter(boardList => searchVal.value() === res.writer);
+        console.log(result);
+        return result;
     }
 </script>
 </body>
