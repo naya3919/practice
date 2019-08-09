@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="board.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<script src="https://unpkg.com/jquery"></script>
+<!-- <script src="board.js"></script> -->
 </head>
 <body>
-    <h1>게시판 연습하기</h1>
-    <table id="board" style="border: solid 3px skyblue;">
-        <tr>
-            <td>글번호</td>
-            <td>제목</td>
-            <td>작성자</td>
-            <td>조회수</td>
-        </tr>
-    </table>
+<h1>게시판 연습하기</h1>
+<table id="board" style="border: solid 3px skyblue;">
+    <tr>
+        <td>글번호</td>
+        <td>제목</td>
+        <td>작성자</td>
+        <td>조회수</td>
+    </tr>
+</table>
 
-    <script>
-        let board = document.querySelector('#board');
-        //let five = {number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52}
-        boardList.push({number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52});
-        onload = function (){
+<script>
+    let board = document.querySelector('#board');
+    // boardList.push({number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52});
+    onload = function (){
+        $.ajax({
+            // url:"http://localhost:3005",
+            // type:get, post, delete, put | 디폴트는 get 방식
+            url:"http://localhost:3005/board",
+            success: function(res){
+                res.sort(function (a,b){
+                    return a.number - b.number;
+                    //return a.number < b.number ? -1 : a.number > b.number ? 1: 0;
+                });
+                console.log(res);
+                boardList = res;
+                list();
+            },
+            error: function(status,error){
+                console.log("error :" + error);
+            }
+        })
+        function list(){
             boardList.forEach(function(item){
                 let tr = document.createElement('tr');
                 let number = document.createElement('td');
@@ -35,8 +53,9 @@
                 tr.appendChild(view).innerHTML = item.view;
                 board.appendChild(tr);
             });
+            // console.log(boardList);
         }
-        console.log(boardList);
-    </script>
+    }
+</script>
 </body>
 </html>
