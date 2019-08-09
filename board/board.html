@@ -19,22 +19,21 @@
     </table>
 
     <script>
+        let board = document.querySelector('#board');
         //let five = {number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52}
         boardList.push({number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52});
-
         onload = function (){
-            let board = document.querySelector('#board');
-            boardList.forEach(function(item,index,array){
+            boardList.forEach(function(item){
                 let tr = document.createElement('tr');
+                let number = document.createElement('td');
+                let title = document.createElement('td');
+                let writer = document.createElement('td');
+                let view = document.createElement('td');
+                tr.appendChild(number).innerHTML = item.number;
+                tr.appendChild(title).innerHTML = item.title;
+                tr.appendChild(writer).innerHTML = item.writer;
+                tr.appendChild(view).innerHTML = item.view;
                 board.appendChild(tr);
-                let td1 = document.createElement('td');
-                let td2 = document.createElement('td');
-                let td3 = document.createElement('td');
-                let td4 = document.createElement('td');
-                tr.appendChild(td1).innerHTML = item.number;
-                tr.appendChild(td2).innerHTML = item.title;
-                tr.appendChild(td3).innerHTML = item.writer;
-                tr.appendChild(td4).innerHTML = item.view;
             });
         }
         console.log(boardList);
