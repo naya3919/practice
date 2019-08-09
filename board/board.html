@@ -6,11 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <script src="https://unpkg.com/jquery"></script>
+<link rel="stylesheet" href="board.css">
 <!-- <script src="board.js"></script> -->
 </head>
 <body>
 <h1>게시판 연습하기</h1>
-<table id="board" style="border: solid 3px skyblue;">
+<table id="board">
     <tr>
         <td>글번호</td>
         <td>제목</td>
@@ -21,7 +22,6 @@
 
 <script>
     let board = document.querySelector('#board');
-    // boardList.push({number: 5, title:'자바는 재미있어요!', writer:'이향은', view: 52});
     onload = function (){
         $.ajax({
             // url:"http://localhost:3005",
