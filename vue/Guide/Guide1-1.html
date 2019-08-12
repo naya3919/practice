@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <title>Vue</title>
+</head>
+
+<style>
+    .bg-red {
+        background: red;
+    }
+
+    .bg-green {
+        background: green;
+    }
+</style>
+
+
+<body>
+
+    <div class="jaedeok">
+        <!-- 뷰 객체가 들어가는 공간 입니다. -->
+    </div>
+
+
+
+    <script>
+    
+        // Front
+        // SPA : React, Vue, Angular, Amber ...
+        // Single Page Application
+        // 재사용성
+        // es6
+
+        // let url = 'http://localhost:3005/board'
+        // let success = function(res) {console.log('sdaf: ', res)}
+        // let options = {
+        //     url,
+        //     success
+        // }
+        // $.ajax(options)
+
+        //let optiops = {}
+
+
+
+        // new Vue({
+        //     el: '.jaedeok',
+        //     template: '<h3>aasdfasdfasdf</h3>'
+        // })
+
+
+        Vue.component('menuItem', {
+            template: `
+                <div id="menu">
+                    <div>회사소개</div>
+                    <div>게시판</div>
+                    <div>연락처</div>
+                </div>
+            `,
+            // created: function() {
+            //     alert('menuItem 생성')
+            // }
+        })
+
+        Vue.component('Home', {
+            template: `
+                <div id="home">
+                    <menuItem/>
+                    <h2>Home 페이지 입니다.</h2>
+                </div>
+            `,
+            // created: function() {
+            //     alert('Home 생성')
+            // }
+        })
+
+        Vue.component('Board', {
+            template: `
+                <div id="board">
+                    <menuItem/>
+                    <h2>게시판 페이지 입니다.</h2>
+                </div>
+            `,
+            // created: function() {
+            //     alert('Board 생성')
+            // }
+        })
+
+
+        let app = new Vue({
+            // Vue 객체가 생성되는 엘리먼트 (선택자로 입력)
+            el: '.jaedeok',
+
+            // 해당 Vue Component가 가지고 있는 HTML 모양
+            template: `
+                <div :class="bgClass">
+                    <h3>Test</h3><br>
+
+
+                    
+                    <div id="test" v-show="isGreeting">
+                        <div id="children"></div>
+                        {{ title }}
+                        {{ greeting }}
+                        
+                        {{ title }}
+                    </div>
+                    
+                    <input type="text" @keyup="inputText" :value="title" />
+                    <input type="text" @keyup="inputText" v-model="title" />
+                    <button v-on:click="toggleGreeting">인사말 보기1</button>
+                    <button @click="toggleGreeting">인사말 보기2</button>
+
+                    <button @click="changeBackground">배경 체인지</button>
+
+                    <Home/>
+                </div>
+            `,
+
+            // 해당 Vue Component가 사용하는 데이터
+            data: {
+                greeting: '안녕하세요',
+                title: '제목 입력 바인딩',
+                isGreeting: false,
+                bgClass: 'bg-green'
+            },
+
+            // 해당 Vue Component가 사용하는 함수
+            methods: {
+                showAlert(message) {
+                    alert(message)
+                },
+                toggleGreeting() {
+                    console.log('this.isGreeting : ', this.isGreeting)
+                    this.isGreeting = !this.isGreeting
+                    console.log('toggleGreeting run')
+                },
+                inputText() {
+                    console.log('inputText - this.title : ', this.title)
+                    
+                },
+                changeBackground() {
+                    console.log('changeBackground')
+                    this.bgClass = 'bg-red'
+                }
+            },
+
+            // Life Cycle 기능
+            beforeCreate: function() {
+
+            },
+            created: function() {
+                //alert('created')
+                //document.querySelector('#test').innerHTML = "안녕하세요"
+            },
+            mounted: function() {
+                //alert('mounted')
+                //document.querySelector('#test').innerHTML = this.greeting
+
+                console.log(typeof this.showAlert)
+                document.querySelector('#children').innerHTML = "asdf"
+            },
+            updated: function() {
+
+            },
+            beforeDestroy: function() {
+
+            }
+        })
+
+        
+
+        
+        
+    </script>
+</body>
+</html>

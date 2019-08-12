@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FilterExample</title>
+  <script src="https://unpkg.com/jquery"></script>
+</head>
+<body>
+  <h1>필터테이블 추가</h1>
+    <!-- filterTable Test-->
+    <table id="board">
+      <tr>
+        <td>글번호</td>
+        <td>제목</td>
+        <td>작성자</td>
+        <td>조회수</td>
+      </tr>
+    </table>
+  </div>
+  <input type="text" id="searchVal" value="" placeholder="검색어를 입력해주세요" />
+  <input type="button" id="keyUpEvent" value="검색" onclick='searchCilck();' />
+
+  <script>
+    onload = function() {
+      $.ajax({
+        url:"http://localhost:3005/board",
+        success: function(res){
+          res.sort(function (a,b){
+            return a.number - b.number;
+          });
+          tableData = res;
+          console.log("tableData:",tableData);
+          list();
+        },
+        error: function(request, status, error){
+          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+      })
+    };
+
+    //테이블 리스트
+    function list() {
+      tableData.forEach(function(item){
+        addTable(item);
+      });
+    };
+
+    // input 값이 바뀔때 실시간으로 검색 값 출력
+    window.onkeyup = function(){
+      searchCilck();
+    }
+
+    //테이블 삭제
+    function cellDelete(){
+      let cell = document.getElementById("board");
+      cell.innerHTML="";
+    }
+
+    //테이블 추가
+    function addTable(item){
+      let tr = document.createElement('tr');
+      let number = document.createElement('td');
+      let title = document.createElement('td');
+      let writer = document.createElement('td');
+      let view = document.createElement('td');
+      tr.appendChild(number).innerHTML = item.number;
+      tr.appendChild(title).innerHTML = item.title;
+      tr.appendChild(writer).innerHTML = item.writer;
+      tr.appendChild(view).innerHTML = item.view;
+      board.appendChild(tr);
+    }
+
+    // 클릭 시 input값과 같은 값으로 출력
+    function searchCilck(){
+      cellDelete();
+      let searchValDate = document.getElementById("searchVal").value;
+      let filterData = tableData.filter(function(item) {
+        return item.writer == searchValDate
+      });
+      filterData.forEach(function(item){
+        addTable(item);
+      });
+      console.log("searchValDate:",searchValDate);
+    }
+
+  </script>
+</body>
+</html>

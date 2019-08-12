@@ -19,9 +19,6 @@
             <td>조회수</td>
         </tr>
     </table>
-    <input type="text" id="searchVal" value="">
-    <input type="button" onclick="search()" value="검색" />
-
 <script>
     let board = document.querySelector('#board');
     let searchVal = document.querySelector('#searchVal');
@@ -60,11 +57,6 @@
             });
             // console.log(boardList);
         }
-    }
-    function search(){
-        let result = boardList.filter(boardList => searchVal.value() === res.writer);
-        console.log(result);
-        return result;
     }
 </script>
 </body>
