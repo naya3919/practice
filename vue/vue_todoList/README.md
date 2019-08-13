@@ -1,4 +1,4 @@
-# todolist
+# vue_todolist
 
 ## Project setup
 ```
