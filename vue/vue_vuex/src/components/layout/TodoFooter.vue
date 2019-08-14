@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import TodoList from '../TodoList'
-
 export default {
   name: 'todoFooter',
   data() {
@@ -19,9 +17,6 @@ export default {
       todo: '',
       todoItems: []
     }
-  },
-  components: {
-    TodoList
   },
   methods: {
     addTodo(){
