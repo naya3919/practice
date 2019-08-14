@@ -1,12 +1,15 @@
 <template>
-  <div id="board">
-    <h3>Board Page</h3>
+  <div>
+    <h1>MainPage 입니다.</h1>
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'mainPage',
+  methods: {
+    
+  },
 }
 </script>
 
